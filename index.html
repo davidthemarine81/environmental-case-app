@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Environmental Case Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Environmental Case Tracking</h1>
+      <p>Track cases, notices, compliance, violations, and repeat offenders.</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Create Environmental Case</h2>
+        <form id="caseForm">
+          <div class="grid">
+            <label>
+              Case Number *
+              <input id="caseNumber" name="caseNumber" required />
+            </label>
+            <label>
+              Location Description
+              <input id="locationDescription" name="locationDescription" />
+            </label>
+            <label>
+              GPS Coordinates
+              <input id="gpsCoordinates" name="gpsCoordinates" placeholder="e.g., 40.7128, -74.0060" />
+            </label>
+            <label>
+              Reporting Party
+              <input id="reportingParty" name="reportingParty" />
+            </label>
+            <label>
+              Type of Violation
+              <input id="violationType" name="violationType" />
+            </label>
+            <label>
+              Narrative Summary
+              <textarea id="narrativeSummary" name="narrativeSummary" rows="3"></textarea>
+            </label>
+            <label>
+              Status
+              <select id="status" name="status">
+                <option value="Open" selected>Open</option>
+                <option value="Pending">Pending</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </label>
+            <label>
+              Assigned Deputy
+              <input id="assignedDeputy" name="assignedDeputy" />
+            </label>
+            <label>
+              Citation Issued
+              <select id="citationIssued" name="citationIssued">
+                <option value="No" selected>No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </label>
+            <label>
+              Citation Number
+              <input id="citationNumber" name="citationNumber" />
+            </label>
+            <label>
+              Date Closed
+              <input id="dateClosed" name="dateClosed" type="date" />
+            </label>
+            <label>
+              Notice Type
+              <select id="noticeType" name="noticeType">
+                <option value="">-- Select --</option>
+                <option value="30 Day">30 Day</option>
+                <option value="14 Day">14 Day</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label>
+              Notice Date
+              <input id="noticeDate" name="noticeDate" type="date" />
+            </label>
+            <label>
+              Compliance Due Date (auto)
+              <input id="complianceDueDate" name="complianceDueDate" type="date" readonly />
+            </label>
+            <label>
+              Reminder Date (auto)
+              <input id="reminderDate" name="reminderDate" type="date" readonly />
+            </label>
+            <label>
+              Photos (multiple)
+              <input id="photos" name="photos" type="file" accept="image/*" multiple />
+            </label>
+          </div>
+
+          <button type="submit">Create Case</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Views</h2>
+        <div class="view-buttons" id="viewButtons">
+          <button data-view="all" class="active">All Cases</button>
+          <button data-view="active">Active Cases</button>
+          <button data-view="closed">Closed Cases</button>
+          <button data-view="upcoming">Upcoming Compliance</button>
+          <button data-view="pastDue">Past Due</button>
+          <button data-view="repeat">Repeat Offenders</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Environmental Cases</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Case #</th>
+              <th>Date Opened</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Notice</th>
+              <th>Compliance Due</th>
+              <th>Reminder</th>
+              <th>Last Activity</th>
+              <th>Assigned Deputy</th>
+              <th>Flags</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="caseRows"></tbody>
+        </table>
+      </section>
+
+      <section class="panel" id="detailPanel">
+        <h2>Case Details</h2>
+        <p>Select a case to manage updates and logs.</p>
+      </section>
+    </main>
+
+    <template id="detailTemplate">
+      <div class="detail-grid">
+        <div>
+          <h3>Case Info</h3>
+          <ul class="kv" id="caseInfo"></ul>
+          <h4>Photos</h4>
+          <div class="photo-grid" id="photoList"></div>
+        </div>
+
+        <div>
+          <h3>Add Case Note (appends only)</h3>
+          <form id="noteForm">
+            <textarea name="noteText" rows="3" required></textarea>
+            <button type="submit">Add Note</button>
+          </form>
+          <ul id="noteList" class="feed"></ul>
+
+          <h3>Add Violation Log Entry</h3>
+          <form id="violationForm">
+            <label>
+              Date
+              <input name="date" type="date" required />
+            </label>
+            <label>
+              Type of Violation
+              <input name="type" required />
+            </label>
+            <label>
+              Notes
+              <textarea name="notes" rows="2"></textarea>
+            </label>
+            <button type="submit">Add Violation</button>
+          </form>
+          <ul id="violationList" class="feed"></ul>
+        </div>
+
+        <div>
+          <h3>Edit Case (Last Activity auto-updates)</h3>
+          <form id="editForm" class="stack"></form>
+        </div>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
