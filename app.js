@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("caseForm");
-  const tableBody = document.querySelector("#casesTable tbody");
+  const tableBody = document.getElementById("caseRows");
 
   let cases = [];
 
