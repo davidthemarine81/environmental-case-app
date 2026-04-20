@@ -4,16 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let cases = [];
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const caseData = {
       caseNumber: document.getElementById("caseNumber").value,
       location: document.getElementById("locationDescription").value,
-      gps: document.getElementById("gpsCoordinates").value,
-      reporting: document.getElementById("reportingParty").value,
-      violation: document.getElementById("violationType").value,
-      narrative: document.getElementById("narrativeSummary").value,
       status: document.getElementById("status").value,
       deputy: document.getElementById("assignedDeputy").value,
       dateOpened: new Date().toLocaleDateString()
@@ -35,11 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${c.dateOpened}</td>
         <td>${c.location}</td>
         <td>${c.status}</td>
-        <td>${c.violation}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td>${c.deputy}</td>
-        <td>
-          <button onclick="deleteCase(${index})">Delete</button>
-        </td>
+        <td></td>
+        <td><button onclick="deleteCase(${index})">Delete</button></td>
       `;
 
       tableBody.appendChild(row);
