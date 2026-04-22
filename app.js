@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("caseForm");
   const tableBody = document.getElementById("caseRows");
-
+if (!tableBody) {
+  console.error("caseRows not found");
+  return;
+}
+  
   let cases = [];
 
   form.addEventListener("submit", function (e) {
